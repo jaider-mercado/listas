@@ -1,0 +1,45 @@
+from tkinter import Tk, Label, Entry, Button, Text, END
+from Clases.usuarios import usuarios
+
+class Interfaz:
+    def __init__(self):
+        self.usuario_clase = usuarios()
+        self.app = Tk()
+        self.app.title("Gestión de Usuarios")
+        self.app.geometry("500x400")
+        self.crear()
+        self.app.mainloop()
+
+    def crear(self):
+        Label(self.app, text="Nombre:").pack()
+        self.nombre_entry = Entry(self.app)
+        self.nombre_entry.pack()
+
+        Label(self.app, text="Nickname:").pack()
+        self.nickname_entry = Entry(self.app)
+        self.nickname_entry.pack()
+
+        Label(self.app, text="Clave:").pack()
+        self.clave_entry = Entry(self.app, show='*')
+        self.clave_entry.pack()
+
+        Button(self.app, text="Guardar", command=self.guardar).pack(pady=5)
+        Button(self.app, text="Listar Usuarios", command=self.listar).pack(pady=5)
+
+        self.panel = Text(self.app, height=10, width=50)
+        self.panel.pack()
+
+    def guardar(self):
+        nombre = self.nombre_entry.get()
+        nickname = self.nickname_entry.get()
+        clave = self.clave_entry.get()
+        self.usuario_clase.guardarUsuario(nombre, nickname, clave)
+        self.nombre_entry.delete(0, END)
+        self.nickname_entry.delete(0, END)
+        self.clave_entry.delete(0, END)
+
+    def listar(self):
+        self.panel.delete(1.0, END)
+        usuarios = self.usuario_clase.listarUsuarios()
+        for usuario in usuarios:
+            self.panel.insert(END, f"Nombre: {usuario['nombre']}, Nick: {usuario['nickname']}, Clave: {usuario['clave']}\n")
