@@ -1,0 +1,4 @@
+from InterfazG.formulario import Interfaz
+
+if __name__ == "__main__":
+    Interfaz()
