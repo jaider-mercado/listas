@@ -1,0 +1,16 @@
+class usuarios:
+    lista_usuarios = []
+
+    def __init__(self):
+        pass
+
+    def guardarUsuario(self, nombre, nickname, clave):
+        usuario = {
+            'nombre': nombre,
+            'nickname': nickname,
+            'clave': clave
+        }
+        usuarios.lista_usuarios.append(usuario)
+
+    def listarUsuarios(self):
+        return usuarios.lista_usuarios
